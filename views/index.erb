@@ -1,0 +1,42 @@
+<h1>Welcome to Tic-Tac-Toe</h1>
+<h2>About Tic-tac-toe:</h2>
+<p>
+Also called Noughts and crosses (in the UK, Australia, New Zealand, South Africa, India and the rest of the British Commonwealth countries), is a pencil-and-paper game for two players who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three respective marks in a horizontal, vertical, or diagonal row wins the game. This explanation comes from Wikipedia and you can learn more about it by clicking <a href="http://en.wikipedia.org/wiki/Tic-tac-toe">here</a>.
+</p>
+<p>
+    Create the players:
+</p>
+<p>
+    <form name="player_creation_data" action="/" method="post">    Player 1:
+    <p>
+        Which type of player would you like Player 1 to be?
+    </p>
+    <select name="player_1_type">
+        <option value="human">Human</option> 
+        <% if params[:player_1_type] == "computer" %>
+            <option value="computer" selected="selected">Computer</option>
+        <% else %>
+            <option value="computer">Computer</option>
+        <% end %>
+    </select>
+    <p>
+        Please select a single letter to represent player 1?
+    <input type="text" id="mark" name="player_1_mark" value="<%= params[:player_1_mark] || '' %>" maxlength="1" />
+    </p>
+    <p>
+        Player 2:
+    </p>
+    <p>
+        Which type of player would you like Player 2 to be?
+    </p>
+    <select name="player_2_type">
+    <option value="human">Human</option>
+    <option value="computer">Computer</option>
+    </select>
+    <p>
+        Please select a single letter to represent player 2?
+    <input type="text" id="mark" name="player_2_mark" maxlength="1" />
+    </p>
+     <input type="submit" value="Submit" />
+    </form>
+</p>
