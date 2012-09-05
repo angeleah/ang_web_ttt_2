@@ -4,7 +4,8 @@
 		<thead>
 		</thead>
 		<tbody>
-		    <form action="/board" method="post">
+		    <form action="/board/" method="post">
+    			<input type="hidden" value=<%=@turn%>>
     			<tr id="top">
     				<td>
                         <button name="cell" type="hidden" value="0" ><%= @state[0] %></button>
