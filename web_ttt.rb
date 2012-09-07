@@ -2,6 +2,7 @@ require "sinatra"
 require "ang_ttt_gem"
 require "validate"
 require "game"
+require "game_repository"
 
 get '/' do
  erb :index
@@ -18,6 +19,7 @@ post '/' do
   elsif !@validate.mark_input(mark_2)
     erb :index
   else
+    
     create_player(type_1, mark_1)
     create_player(type_2, mark_2)
     @player = 1
