@@ -21,11 +21,8 @@ describe 'ang_web_ttt_2' do
     last_response.body.include?('Welcome to Tic-Tac-Toe')
   end
   
-  it 'should render the board if the params are valid' do
-    post "/", :player_1_type=> "human", :player_1_mark => "x", :player_2_type => "computer", :player_2_mark => "w"
-    last_response.body.include?("<td></td>")
-  end
-
+  # it 'should render the board if the params are valid' do
+  #   post "/", :player_1_type=> "human", :player_1_mark => "x", :player_2_type => "computer", :player_2_mark => "w"
+  #   last_response.body.include?("<td></td>")
+  # end
 end
-
-#@state.should == [...]

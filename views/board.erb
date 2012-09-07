@@ -4,8 +4,8 @@
 		<thead>
 		</thead>
 		<tbody>
-		    <form action="/board/" method="post">
-    			<input type="hidden" value=<%=@turn%>>
+		    <form action="/board" method="post">
+    			<input name="player" type="hidden" value=<%= @player %>
     			<tr id="top">
     				<td>
                         <button name="cell" type="hidden" value="0" ><%= @state[0] %></button>
@@ -43,3 +43,4 @@
 		</tbody>
 	</table>
 </div>
+<p id="message"><%= @message %></p>

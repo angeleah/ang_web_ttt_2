@@ -7,16 +7,6 @@ get '/' do
  erb :index
 end
 
-class Game
-  def self.instance
-    @game ||= Game.new
-  end
-end
-
-def game
-  Game.instance
-end
-
 post '/' do
   @validate = Validate.new
   type_1 = params[:player_1_type]
@@ -30,23 +20,37 @@ post '/' do
   else
     create_player(type_1, mark_1)
     create_player(type_2, mark_2)
-    player_1_move = get_move(1)
+    @player = 1
+    player_1_move = get_move(@player)
     if player_1_move == false
       @state = game.prepare_display_state
       erb :board
     else
-      @state = game.make_move_player(1, player_1_move)
+      @state = game.make_move_player(@player, player_1_move)
+      switch_turn
       erb :board
     end
   end
 end
 
-post '/board/:player' do
-  player 
+def switch_turn
+   @player == 1 ? @player = 2 : @player = 1
+end
+
+post '/board' do
   cell_number = params[:cell]
-   erb :board if game.square_taken?(cell_number)
-  cell_number
-  erb :board
+  player = params[:player].to_i
+  erb :board if game.square_taken?(cell_number)
+  @state = game.make_move_player(player, cell_number)
+  player = switch_turn
+  move = get_move(player)
+  if move == false
+    erb :board
+  else
+    @state = game.make_move_player(player, move)
+    switch_turn
+    erb :board
+  end
 end
 
 # get '/testboard' do
