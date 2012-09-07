@@ -33,6 +33,8 @@ post '/' do
   end
 end
 
+#a method in here that creates a hash out of type and mark
+
 def switch_turn
    @player == 1 ? @player = 2 : @player = 1
 end
