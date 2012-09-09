@@ -4,13 +4,13 @@ require "game"
 class GameRepository
 
   def save(data)
-    File.open('state_machine.rb', 'w') do |file|
+    File.open('state_machine.yml', 'w') do |file|
       file.print data.to_yaml
     end
   end
   
   def load
-    data = YAML::load(File.read('state_machine.rb'))
+     YAML::load(File.read('state_machine.yml'))
   end
 end
 

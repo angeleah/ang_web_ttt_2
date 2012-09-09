@@ -16,7 +16,7 @@ describe 'GameRepository' do
     :mark_2 => "O",
     :board => ["X", " ", "O", "X", "O", " ", " ", "X", "O"] }
     gr.save(@data)
-    File.read("./state_machine.rb").should include("human", "computer", "X", "O", " ")
+    File.read("./state_machine.yml").should include("human", "computer", "X", "O", " ")
   end
   
   it 'should be able to read the game data from a file' do

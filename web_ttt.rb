@@ -19,20 +19,20 @@ post '/' do
   elsif !@validate.mark_input(mark_2)
     erb :index
   else
-    
-    create_player(type_1, mark_1)
-    create_player(type_2, mark_2)
-    @player = 1
-    player_1_move = get_move(@player)
-    if player_1_move == false
-      @state = game.prepare_display_state
-      erb :board
-    else
-      @state = game.make_move_player(@player, player_1_move)
-      switch_turn
-      erb :board
-    end
-  end
+  #   
+  #   create_player(type_1, mark_1)
+  #   create_player(type_2, mark_2)
+  #   @player = 1
+  #   player_1_move = get_move(@player)
+  #   if player_1_move == false
+  #     @state = game.prepare_display_state
+  #     erb :board
+  #   else
+  #     @state = game.make_move_player(@player, player_1_move)
+  #     switch_turn
+  #     erb :board
+  #   end
+  # end
 end
 
 #a method in here that creates a hash out of type and mark
