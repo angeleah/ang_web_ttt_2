@@ -1,10 +1,10 @@
-require "ang_ttt_gem"
 require "game"
+require "yaml"
 
 class GameRepository
 
   def save(data)
-    File.open('state_machine.yml', 'w') do |file|
+    File.open('state_machine.yml', 'w+') do |file|
       file.print data.to_yaml
     end
   end
