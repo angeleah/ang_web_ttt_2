@@ -1,11 +1,14 @@
 <link rel="stylesheet" href="css/main.css" type="text/css" media="screen"/>
+<p><a href="/start_over">Start Over</a></p>
+<p><a href="/quit">Quit Game</a>
+</p>
+<p id="message"><%= @message %></p>
 <div id="board">
 	<table cellspacing="0" cellpadding="0">
 		<thead>
 		</thead>
 		<tbody>
 		    <form action="/board" method="post">
-    		<!--	<input name="player" type="hidden" value=<%= @player %> -->
     			<tr id="top">
     				<td>
                         <button name="cell" type="hidden" value="0" ><%= @state[0] %></button>
@@ -43,4 +46,3 @@
 		</tbody>
 	</table>
 </div>
-<p id="message"><%= @message %></p>

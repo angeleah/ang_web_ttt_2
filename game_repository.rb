@@ -1,4 +1,3 @@
-require "game"
 require "yaml"
 
 class GameRepository
@@ -15,5 +14,4 @@ class GameRepository
 end
 
 
-###consider adding the id to the hash.  
-#Also Jeremy's suggestion of the turn value of 1 or 2.
+###consider adding the id to the hash.

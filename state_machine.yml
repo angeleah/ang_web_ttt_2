@@ -1,10 +1,11 @@
 --- 
-:type_1: computer
-:mark_1: C
+:type_1: human
+:mark_1: D
 :type_2: human
 :mark_2: X
 :turn: 2
 :board_state: 
+- D
 - " "
 - " "
 - " "
@@ -13,4 +14,3 @@
 - " "
 - " "
 - " "
-- C
