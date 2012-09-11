@@ -12,6 +12,4 @@ class GameRepository
      YAML::load(File.read('state_machine.yml'))
   end
 end
-
-
-###consider adding the id to the hash.
+### adding the id to the hash.
