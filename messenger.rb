@@ -25,7 +25,7 @@ class Messenger
     collect_player_data(type_1, mark_1, type_2, mark_2)
     create_players(type_1, mark_1, type_2, mark_2)
     set_turn
-    true #if set_up_success? #not sure what will go here
+    true
   end
 
   def valid_mark_data?(mark_1, mark_2)
@@ -78,7 +78,7 @@ class Messenger
   end
 
   def computer_move
-    while !display_board_for_player?
+    while !display_board?
       player_move = get_move(@player)
       @game.make_move_player(@player, player_move)
       switch_turn
@@ -93,12 +93,12 @@ class Messenger
     @message = @game.result if @game.is_over?
   end
 
-  def valid_move?
+  def valid_move?(cell_number)
     if @game.square_taken?(cell_number)
       prepare_and_save_state
-      return false
+      false
     else
-      return true
+      true
     end
   end
 
