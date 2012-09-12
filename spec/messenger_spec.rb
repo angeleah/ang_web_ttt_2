@@ -7,7 +7,6 @@ require "validate"
 
 describe 'Messenger' do
 
-  let(:game)      { Game.new }
   let(:messenger) { Messenger.new }
   # let(:game_data) { data = 
   #                   {
@@ -53,7 +52,7 @@ describe 'Messenger' do
       type = "human"
       mark = "X"
       messenger.create_player(type, mark)
-      game.players[0].should be_an_instance_of(HumanPlayer)
+      messenger.game.players[0].should be_an_instance_of(HumanPlayer)
     end
     
     it 'should be able to create multiple players' do
@@ -61,23 +60,17 @@ describe 'Messenger' do
       mark_1 = "X"
       type_2 = "computer"
       mark_2 = "O"
-      game.players[0].should be_an_instance_of(HumanPlayer)
-      game.players[1].should be_an_instance_of(ComputerPlayer)
-      game.players.count.should == 2
+      messenger.create_players(type_1, mark_1, type_2, mark_2)
+      messenger.game.players[0].should be_an_instance_of(HumanPlayer)
+      messenger.game.players[1].should be_an_instance_of(ComputerPlayer)
+      messenger.game.players.count.should == 2
     end
     
-    
-    
     it 'should turn the params from index into a hash for the .yml file' do
-      @type_1 = "human"
-      @mark_1 = "A"
-      @type_2 = "computer"
-      @mark_2 = "P"
       @player = 1
-      @board_state = messenger.game.stub(:gather_board_state).and_return([" ", " ", " ", " ", " ", " ", " ", " ", " ",])
-      data = messenger.prepare_hash_for_storage
-      data.should == 
-      {
+      messenger.collect_player_data("human", "A", "computer", "P")
+      messenger.set_turn
+      messenger.prepare_hash_for_storage.should == {
         :type_1 => "human",
         :mark_1 => "A",
         :type_2 => "computer",
@@ -140,13 +133,29 @@ describe 'Messenger' do
    end
    
     it 'should be able to save a game state' do
-         save_game_state(game_data)
+       game_data = {
+        :type_1 => "human",
+        :mark_1 => "A",
+        :type_2 => "computer",
+        :mark_2 => "P",
+        :turn => 1,
+        :board_state => [" ", " ", " ", " ", " ", " ", " ", " ", " ",]
+      }
+         messenger.save_game_state(game_data)
          File.read("./state_machine.yml").should include("human", "computer", "A", "P", " ", "1")
        end
    
        it 'should be able to load the game state' do
-         save_game_state(game_data)
-         @fetched_data = load_game_state
+         game_data = {
+           :type_1 => "human",
+           :mark_1 => "A",
+           :type_2 => "computer",
+           :mark_2 => "P",
+           :turn => 1,
+           :board_state => [" ", " ", " ", " ", " ", " ", " ", " ", " ",]
+         }
+         messenger.save_game_state(game_data)
+         @fetched_data = messenger.load_game_state
          @fetched_data.should == 
          {
            :type_1 => "human",
@@ -159,21 +168,22 @@ describe 'Messenger' do
        end
    
        it 'should be able to reconstruct a game' do
-         reconstruct_game
-         @type_1.should == @data[:type_1]
-         @mark_1.should == @data[:mark_1]
-         @type_2.should == @data[:type_2]
-         @mark_2.should == @data[:mark_2]
-         @player.should == @data[:turn]
-         @board_state.should == @data[:board_state]
-         @game.players.count.should == 2
+         messenger.stub(:load_game_state).and_return({
+            :type_1 => "human",
+            :mark_1 => "A",
+            :type_2 => "computer",
+            :mark_2 => "P",
+            :turn => 1,
+            :board_state => [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+          })
+         messenger.reconstruct_game.should == [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+         messenger.game.players.count.should == 2
        end
    
        it 'should be able to populate a board' do
-         @game = Game.new
          board_state = ["X", " ", " ", " ", " ", " ", " ", " ", " "]
-         populate_board(board_state)
-         @game.gather_board_state.should == ["X", " ", " ", " ", " ", " ", " ", " ", " "]
+         messenger.populate_board(board_state)
+         messenger.game.gather_board_state.should == board_state
        end
    
 end

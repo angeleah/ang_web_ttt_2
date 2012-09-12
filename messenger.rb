@@ -7,6 +7,8 @@ require "message"
 
 class Messenger
   
+  attr_reader :game
+  
   def initialize
     @game = Game.new
   end
@@ -23,13 +25,12 @@ class Messenger
     collect_player_data(type_1, mark_1, type_2, mark_2)
     create_players(type_1, mark_1, type_2, mark_2)
     set_turn
-    return true #if set_up_success? #not sure what will go here
+    true #if set_up_success? #not sure what will go here
   end
 
   def valid_mark_data?(mark_1, mark_2)
     @validate = Validate.new
-    return false if !@validate.mark_input(mark_1)
-    return false if !@validate.mark_input(mark_2)
+    @validate.mark_input(mark_1) && @validate.mark_input(mark_2)
   end
 
   def create_players(type_1, mark_1, type_2, mark_2)
@@ -120,6 +121,12 @@ class Messenger
   def load_game_state
     @game_repository = GameRepository.new
     @game_repository.load
+  end
+  
+  def populate_board(board_state)
+    board_state.each_with_index{ |i, index|
+      @game.make_move(index,i)
+    }
   end
 
   def reconstruct_game

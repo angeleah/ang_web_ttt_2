@@ -26,12 +26,6 @@ post '/' do
   erb :board
 end
 
-def populate_board(board_state)
-  board_state.each_with_index{ |i, index|
-    @game.make_move(index,i)
-  }
-end
-
 post '/board' do
   messenger.reconstruct_game
   cell_number = params[:cell].to_i
