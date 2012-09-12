@@ -9,7 +9,7 @@ describe 'Messenger' do
 
   let(:messenger) { Messenger.new }
 
-  it 'should collect player data ' do
+  it 'should collect player data' do
     type_1 = "human"
     mark_1 = "x"
     type_2 = "computer"
@@ -32,7 +32,7 @@ describe 'Messenger' do
     messenger.valid_mark_data?(mark_1, mark_2).should == true
   end
 
-  it 'should return true when given valid mark data' do
+  it 'should return false when given invalid mark data' do
     mark_1 = "1"
     mark_2 = "z"
     messenger.valid_mark_data?(mark_1, mark_2).should == false
@@ -78,43 +78,41 @@ describe 'Messenger' do
     messenger.set_turn
     messenger.switch_turn.should == 2
   end
-
-  it 'decide_on_action should choose computer move when display_board?' do
+  
+  it 'should choose computer_move when display_board? is false' do
+    cell = nil
     messenger.set_up_game("computer", "X","human", "O")
     board_state = ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
     messenger.populate_board(board_state)
-    messenger.stub(:display_board?).and_return(false)
+    messenger.game.stub(:get_player_move).and_return(5)
     messenger.decide_on_action.should == ["X", "O", "X", "O", "O", "X", "O", "X", "X"]
   end
 
-  it 'decide_on_action should save and prepare the game state when display_board? is true' do
-    messenger.set_up_game("computer", "X","human", "O")
+  it 'should save and prepare the game state when display_board? is true' do
+    cell = nil
+    messenger.set_up_game("human", "X","computer", "O")
     board_state = ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
     messenger.populate_board(board_state)
-    messenger.stub(:display_board?).and_return(false)
-    messenger.decide_on_action.should == ["X", "O", "X", "O", "O", "X", "O", "X", "X"]
+    messenger.game.stub(:get_player_move).and_return(false)
+    messenger.decide_on_action.should == ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
   end
 
-  it 'should not display the board if get move is true' do
-   messenger.stub(:get_move).and_return(true)
-   messenger.display_board?.should == false
+  it 'should not display the board if get_move is true' do
+    messenger.set_up_game("computer", "X","human", "O")
+    messenger.display_board?.should == false
   end
 
-  it 'should display the board if get move is false' do
-   messenger.stub(:get_move).and_return(false)
-   messenger.display_board?.should == true
+  it 'should display the board if get_move is false' do
+    messenger.set_up_game("human", "X","computer", "O")
+    messenger.display_board?.should == true
   end
 
   it 'should be able to prepare and save the state' do
-    messenger.stub(:prepare_hash_for_storage).and_return({
-      :type_1 => "human",
-      :mark_1 => "A",
-      :type_2 => "computer",
-      :mark_2 => "P",
-      :turn => 1,
-      :board_state => [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-    })
-    messenger.prepare_and_save_state.should == [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    messenger.set_up_game("human", "A","computer", "P")
+    board_state = ["X", " ", " ", " ", " ", " ", " ", " ", " "]
+    messenger.populate_board(board_state)
+    messenger.prepare_hash_for_storage
+    messenger.prepare_and_save_state.should == ["X", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
   it 'should be able to gather the board state' do
@@ -127,17 +125,17 @@ describe 'Messenger' do
     messenger.set_up_game("computer", "X","human", "O")
     board_state = ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
     messenger.populate_board(board_state)
-    messenger.stub(:display_board?).and_return(false)
+    messenger.game.stub(:get_player_move).and_return(5)
     messenger.computer_move.should == ["X", "O", "X", "O", "O", "X", "O", "X", "X"]
   end
 
-  it 'should return true for valid_move? when given valid data' do
+  it 'should detect if a move is valid' do
     board_state = ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
     messenger.populate_board(board_state)
     messenger.valid_move?(5).should == true
   end
-
-  it  'should return false for valid_move? when given invalid data' do
+  
+  it  'should detect if a move is invalid' do
     board_state = ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
     messenger.populate_board(board_state)
     messenger.valid_move?(1).should == false

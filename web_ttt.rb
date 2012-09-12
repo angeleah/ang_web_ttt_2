@@ -21,29 +21,30 @@ end
 
 post '/' do
   messenger = Messenger.new
-  messenger.set_up_game(params[:player_1_type], params[:player_1_mark], params[:player_2_type], params[:player_2_mark]) == true ? @state = messenger.decide_on_action : (erb :index)
-  @message = @game.result if @game.is_over?
-  erb :board
+  if messenger.set_up_game(params[:player_1_type], params[:player_1_mark], params[:player_2_type], params[:player_2_mark])
+    @state = messenger.decide_on_action
+    #@message = @game.result if @game.is_over?
+    erb :board
+  else
+    erb :index
+  end
 end
 
 post '/board' do
-  messenger.reconstruct_game
-  cell_number = params[:cell].to_i
-  player_move = get_move(@player)
-  erb :board if !messenger.valid_move?
-  if @game.square_taken?(cell_number)
-    @state = @game.gather_board_state
-    data = prepare_hash_for_storage
-    save_game_state(data)
-  
-  else
+  if !messenger.valid_move(params[:cell].to_i)
+    erb :board
+  elsif messenger.valid_move(params[:cell].to_i)
+    @state = messenger.decide_on_action
     @game.make_move_player(@player, cell_number)
-    @state = @game.gather_board_state
     switch_turn
     data = prepare_hash_for_storage
     save_game_state(data)
+    if game.is_over?
+      gather_board_state
+    else
+      computer_move
+    end
   end
-  computer_move
-  @message = @game.result if @game.is_over?
-  erb :board      #if there is a winner disable all clicks
+#  @message = @game.result if @game.is_over?
+    erb :board      #if there is a winner disable all clicks
 end

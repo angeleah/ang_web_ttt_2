@@ -87,6 +87,9 @@ class Messenger
     end
     gather_board_state
   end
+  
+  def human_move(cell)
+  end
 
   def check_for_win_lose_draw
     message = Message.new
@@ -141,5 +144,15 @@ class Messenger
     create_player(@type_1, @mark_1)
     create_player(@type_2, @mark_2)
     populate_board(@board_state)
+  end
+
+  def method_in_messenger(cell)
+    messenger.reconstruct_game
+    cell_number = cell
+    if !valid_move(cell)
+      prepare_and_save_state
+      return false
+    else
+    end
   end
 end
