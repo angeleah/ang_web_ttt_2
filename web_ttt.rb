@@ -20,9 +20,9 @@ get '/quit' do
 end
 
 post '/' do
-  messenger = Messenger.new
-  if messenger.set_up_game(params[:player_1_type], params[:player_1_mark], params[:player_2_type], params[:player_2_mark])
-    @state, @message = messenger.ai_move_if_possible
+  @messenger = Messenger.new
+  if @messenger.set_up_game(params[:player_1_type], params[:player_1_mark], params[:player_2_type], params[:player_2_mark])
+    @state, @message = @messenger.ai_move_if_possible
     erb :board
   else
     erb :index
@@ -30,11 +30,12 @@ post '/' do
 end
 
 post '/board' do
-  messenger = Messenger.new
-  if !messenger.valid_move?(params[:cell].to_i)
+  @messenger = Messenger.new
+  if @messenger.valid_move?(params[:cell].to_i) == false
+    @state = @messenger.gather_board_state
     erb :board
-  elsif messenger.valid_move?(params[:cell].to_i)
-    @state, @message = messenger.human_move(params[:cell].to_i)
+  elsif @messenger.valid_move?(params[:cell].to_i)
+    @state, @message = @messenger.human_move(params[:cell].to_i)
     erb :board
   end
 end

@@ -136,15 +136,19 @@ describe 'Messenger' do
   end
 
   it 'should detect if a move is valid' do
+    messenger.set_up_game("human", "X","computer", "O")
     board_state = ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
-    messenger.populate_board(board_state)
+    messenger.prepare_hash_for_storage
+    messenger.prepare_and_save_state
     messenger.valid_move?(5).should == true
   end
   
   it  'should detect if a move is invalid' do
-    board_state = ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
-    messenger.populate_board(board_state)
-    messenger.valid_move?(1).should == false
+    messenger.set_up_game("human", "X","computer", "O")
+    messenger.game.stub(:gather_board_state).and_return(["X", "O", "X", "O", "O", " ", "O", "X", "X"])
+    messenger.prepare_hash_for_storage
+    messenger.prepare_and_save_state
+    messenger.valid_move?(2).should == false
   end
 
   it 'should be able to save a game state' do

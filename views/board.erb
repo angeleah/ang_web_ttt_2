@@ -11,35 +11,35 @@
 		    <form action="/board" method="post">
     			<tr id="top">
     				<td>
-                        <button name="cell" type="hidden" value="0" ><%= @state[0] %></button>
+                        <button class="button" name="cell" type="hidden" value="0" <%= "disabled=\"true\"" if @messenger.game_over %> ><%= @state[0] %></button>
     				</td>
     				<td>
-    				    <button name="cell" type="hidden" value="1" ><%= @state[1]%></button>
+    				    <button class="button" name="cell" type="hidden" value="1" <%= "disabled=\"true\"" if @messenger.game_over %> ><%= @state[1]%></button>
                     </td>
     				<td>
-    				    <button name="cell" type="hidden" value="2" ><%= @state[2]%></button>
+    				    <button class="button" name="cell" type="hidden" value="2" <%= "disabled=\"true\"" if @messenger.game_over %> ><%= @state[2]%></button>
     				</td>
     			</tr>
     			<tr>
     				<td>
-    				    <button name="cell" type="hidden" value="3" ><%= @state[3]%></button>
+    				    <button class="button" name="cell" type="hidden" value="3" <%= "disabled=\"true\"" if @messenger.game_over %> ><%= @state[3]%></button>
     				</td>
     				<td>
-    				    <button name="cell" type="hidden" value="4" ><%= @state[4]%></button>
+    				    <button class="button" name="cell" type="hidden" value="4" <%= "disabled=\"true\"" if @messenger.game_over %> ><%= @state[4]%></button>
                     </td>
     				<td>
-    				    <button name="cell" type="hidden" value="5" ><%= @state[5]%></button>
+    				    <button class="button" name="cell" type="hidden" value="5" <%= "disabled=\"true\"" if @messenger.game_over %> ><%= @state[5]%></button>
     				</td>
     			</tr>
     			<tr>
     				<td>
-    				    <button name="cell" type="hidden" value="6" ><%= @state[6]%></button>
+    				    <button class="button" name="cell" type="hidden" value="6" <%= "disabled=\"true\"" if @messenger.game_over %> ><%= @state[6]%></button>
     				</td>
     				<td>
-    				    <button name="cell" type="hidden" value="7" ><%= @state[7]%></button>
+    				    <button class="button" name="cell" type="hidden" value="7" <%= "disabled=\"true\"" if @messenger.game_over %> ><%= @state[7]%></button>
     				</td>
     				<td>
-    				    <button name="cell" type="hidden" value="8" ><%= @state[8]%></button>
+    				    <button class="button" name="cell" type="hidden" value="8" <%= "disabled=\"true\"" if @messenger.game_over %> ><%= @state[8]%></button>
     				</td>
     			</tr>
 			</form>

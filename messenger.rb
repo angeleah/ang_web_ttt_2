@@ -113,6 +113,7 @@ class Messenger
   end
 
   def valid_move?(cell_number)
+    reconstruct_game
     if @game.square_taken?(cell_number)
       prepare_and_save_state
       false
@@ -162,13 +163,7 @@ class Messenger
     populate_board(@board_state)
   end
 
-  def method_in_messenger(cell)
-    messenger.reconstruct_game
-    cell_number = cell
-    if !valid_move(cell)
-      prepare_and_save_state
-      return false
-    else
-    end
+  def game_over
+    @game.is_over?
   end
 end
