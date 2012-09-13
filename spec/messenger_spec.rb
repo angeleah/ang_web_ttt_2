@@ -11,9 +11,9 @@ describe 'Messenger' do
 
   it 'should collect player data' do
     type_1 = "human"
-    mark_1 = "x"
+    mark_1 = "X"
     type_2 = "computer"
-    mark_2 = "o"
+    mark_2 = "O"
     data = messenger.collect_player_data(type_1, mark_1, type_2, mark_2)
     data.should == "O"
   end

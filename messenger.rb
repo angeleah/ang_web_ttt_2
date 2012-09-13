@@ -15,15 +15,15 @@ class Messenger
 
   def collect_player_data(type_1, mark_1, type_2, mark_2)
     @type_1 = type_1
-    @mark_1 = mark_1.upcase
+    @mark_1 = mark_1
     @type_2 = type_2
-    @mark_2 = mark_2.upcase
+    @mark_2 = mark_2
   end
 
   def set_up_game(type_1, mark_1, type_2, mark_2)
     return false if !valid_mark_data?(mark_1, mark_2)
-    collect_player_data(type_1, mark_1, type_2, mark_2)
-    create_players(type_1, mark_1, type_2, mark_2)
+    collect_player_data(type_1, mark_1.upcase, type_2, mark_2.upcase)
+    create_players(type_1, mark_1.upcase, type_2, mark_2.upcase)
     set_turn
     true
   end
@@ -80,16 +80,20 @@ class Messenger
   end
 
   def computer_move
+    computer_loop unless game_over?
+    message = prepare_message if game_over?
+    state = gather_board_state
+    return state, message
+  end
+  
+  def computer_loop
     while !display_board?
       player_move = get_move(@player)
       @game.make_move_player(@player, player_move)
       switch_turn
       prepare_and_save_state
-      break if @game.is_over?
+      break if game_over?
     end
-    message = prepare_message if @game.is_over?
-    state = gather_board_state
-    return state, message
   end
 
   def human_move(cell_number)
@@ -97,12 +101,12 @@ class Messenger
     @game.make_move_player(@player, cell_number)
     switch_turn
     prepare_and_save_state
-    message = prepare_message if @game.is_over?
+    message = prepare_message if game_over?
     if display_board?
       state = gather_board_state
       return state, message
     else
-      computer_move unless @game.is_over?
+      computer_move
     end
   end
   
@@ -163,7 +167,7 @@ class Messenger
     populate_board(@board_state)
   end
 
-  def game_over
+  def game_over?
     @game.is_over?
   end
 end
