@@ -22,8 +22,7 @@ end
 post '/' do
   messenger = Messenger.new
   if messenger.set_up_game(params[:player_1_type], params[:player_1_mark], params[:player_2_type], params[:player_2_mark])
-    @state = messenger.decide_on_action
-    #@message = @game.result if @game.is_over?
+    @state, @message = messenger.ai_move_if_possible
     erb :board
   else
     erb :index
@@ -31,20 +30,11 @@ post '/' do
 end
 
 post '/board' do
-  if !messenger.valid_move(params[:cell].to_i)
+  messenger = Messenger.new
+  if !messenger.valid_move?(params[:cell].to_i)
     erb :board
-  elsif messenger.valid_move(params[:cell].to_i)
-    @state = messenger.decide_on_action
-    @game.make_move_player(@player, cell_number)
-    switch_turn
-    data = prepare_hash_for_storage
-    save_game_state(data)
-    if game.is_over?
-      gather_board_state
-    else
-      computer_move
-    end
+  elsif messenger.valid_move?(params[:cell].to_i)
+    @state, @message = messenger.human_move(params[:cell].to_i)
+    erb :board
   end
-#  @message = @game.result if @game.is_over?
-    erb :board      #if there is a winner disable all clicks
 end

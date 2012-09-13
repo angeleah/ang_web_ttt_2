@@ -6,9 +6,9 @@ require "game_repository"
 require "message"
 
 class Messenger
-  
+
   attr_reader :game
-  
+
   def initialize
     @game = Game.new
   end
@@ -51,16 +51,18 @@ class Messenger
      @player == 1 ? @player = 2 : @player = 1
   end
 
-  def decide_on_action
+  def ai_move_if_possible
     if display_board?
-      prepare_and_save_state
+      state = prepare_and_save_state
+      message = nil
     else
-      computer_move
+      state, message = computer_move
     end
+    return state, message
   end
 
   def display_board?
-     get_move(@player) == false ? true : false
+     !@game.player_can_make_move?(@player)
   end
 
   def prepare_and_save_state
@@ -85,15 +87,29 @@ class Messenger
       prepare_and_save_state
       break if @game.is_over?
     end
-    gather_board_state
-  end
-  
-  def human_move(cell)
+    message = prepare_message if @game.is_over?
+    state = gather_board_state
+    return state, message
   end
 
-  def check_for_win_lose_draw
-    message = Message.new
-    @message = @game.result if @game.is_over?
+  def human_move(cell_number)
+    reconstruct_game
+    @game.make_move_player(@player, cell_number)
+    switch_turn
+    prepare_and_save_state
+    message = prepare_message if @game.is_over?
+    if display_board?
+      state = gather_board_state
+      return state, message
+    else
+      computer_move unless @game.is_over?
+    end
+  end
+  
+  def prepare_message
+    @message = Message.new
+    key = @game.result
+    @message.passed(key)
   end
 
   def valid_move?(cell_number)

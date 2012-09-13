@@ -85,7 +85,7 @@ describe 'Messenger' do
     board_state = ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
     messenger.populate_board(board_state)
     messenger.game.stub(:get_player_move).and_return(5)
-    messenger.decide_on_action.should == ["X", "O", "X", "O", "O", "X", "O", "X", "X"]
+    messenger.ai_move_if_possible.should == [["X", "O", "X", "O", "O", "X", "O", "X", "X"], "Player 1 is the winner!\n"]
   end
 
   it 'should save and prepare the game state when display_board? is true' do
@@ -94,7 +94,7 @@ describe 'Messenger' do
     board_state = ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
     messenger.populate_board(board_state)
     messenger.game.stub(:get_player_move).and_return(false)
-    messenger.decide_on_action.should == ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
+    messenger.ai_move_if_possible.should == [["X", "O", "X", "O", "O", " ", "O", "X", "X"], nil]
   end
 
   it 'should not display the board if get_move is true' do
@@ -126,7 +126,13 @@ describe 'Messenger' do
     board_state = ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
     messenger.populate_board(board_state)
     messenger.game.stub(:get_player_move).and_return(5)
-    messenger.computer_move.should == ["X", "O", "X", "O", "O", "X", "O", "X", "X"]
+    messenger.computer_move.should == [["X", "O", "X", "O", "O", "X", "O", "X", "X"], "Player 1 is the winner!\n"]
+  end
+  
+  it 'should should be able to prepare a message' do
+    messenger.game.stub(:is_over?).and_return(true)
+    messenger.game.stub(:result).and_return(:draw)
+    messenger.prepare_message.should == "It's a draw.\n"
   end
 
   it 'should detect if a move is valid' do
