@@ -1,6 +1,5 @@
 $: << File.expand_path(File.dirname(__FILE__))
 require "sinatra"
-require "pry"
 require "ang_ttt_gem"
 require "validate"
 require "game"

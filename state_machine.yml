@@ -1,16 +1,16 @@
 --- 
-:type_1: human
+:id: 45
+:type_1: computer
 :mark_1: X
-:type_2: computer
-:mark_2: W
-:turn: 1
-:board_state: 
-- W
+:type_2: human
+:mark_2: O
+:board: 
+- X
+- " "
+- O
+- X
+- O
 - " "
 - " "
 - X
-- " "
-- " "
-- " "
-- " "
-- " "
+- O

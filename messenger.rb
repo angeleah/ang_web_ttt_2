@@ -125,9 +125,9 @@ class Messenger
       true
     end
   end
-
+  
   def prepare_hash_for_storage
-    {
+    { :id =>  @id,
       :type_1 => @type_1,
       :mark_1 => @mark_1,
       :type_2 => @type_2,
@@ -155,6 +155,7 @@ class Messenger
 
   def reconstruct_game
     data = load_game_state
+    @id = data[:id]
     @type_1 = data[:type_1]
     @mark_1 = data[:mark_1]
     @type_2 = data[:type_2]

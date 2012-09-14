@@ -61,6 +61,7 @@ describe 'Messenger' do
     messenger.collect_player_data("human", "A", "computer", "P")
     messenger.set_turn
     messenger.prepare_hash_for_storage.should == {
+      :id => nil,
       :type_1 => "human",
       :mark_1 => "A",
       :type_2 => "computer",
@@ -203,7 +204,6 @@ describe 'Messenger' do
   it 'should be able to populate a board' do
     messenger.set_up_game("human", "X", "computer", "O")
     board_state = ["X", " ", " ", " ", " ", " ", " ", " ", " "]
-    messenger.populate_board(board_state)
-    messenger
+    messenger.populate_board(board_state).should == ["X", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 end
