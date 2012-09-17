@@ -1,18 +1,25 @@
-require "pry"
+  require "pry"
 require "ang_ttt_gem"
 require "game"
 require "validate"
 require "game_repository"
 require "message"
+require "securerandom"
+
 
 class Messenger
 
   attr_reader :game
 
-  def initialize
+  def initialize(id = nil)
     @game = Game.new
+    @id = id || SecureRandom.uuid
   end
-
+  
+  def game_id
+    @id
+  end
+  
   def collect_player_data(type_1, mark_1, type_2, mark_2)
     @type_1 = type_1
     @mark_1 = mark_1
@@ -46,7 +53,7 @@ class Messenger
   def set_turn
     @player = 1
   end
-  
+
   def switch_turn
      @player == 1 ? @player = 2 : @player = 1
   end
@@ -127,8 +134,7 @@ class Messenger
   end
   
   def prepare_hash_for_storage
-    { :id =>  @id,
-      :type_1 => @type_1,
+    { :type_1 => @type_1,
       :mark_1 => @mark_1,
       :type_2 => @type_2,
       :mark_2 => @mark_2,
@@ -139,14 +145,14 @@ class Messenger
 
   def save_game_state(data)
     @game_repository = GameRepository.new
-    @game_repository.save(data)
+    @game_repository.save(@id, data)
   end
 
   def load_game_state
     @game_repository = GameRepository.new
-    @game_repository.load
+    @game_repository.load(@id)
   end
-  
+
   def populate_board(board_state)
     board_state.each_with_index{ |i, index|
       @game.make_move(index,i)
@@ -155,7 +161,6 @@ class Messenger
 
   def reconstruct_game
     data = load_game_state
-    @id = data[:id]
     @type_1 = data[:type_1]
     @mark_1 = data[:mark_1]
     @type_2 = data[:type_2]
@@ -170,5 +175,10 @@ class Messenger
 
   def game_over?
     @game.is_over?
+  end
+
+  def delete_game_file
+    @game_repository = GameRepository.new
+    @game_repository.delete(@id)
   end
 end

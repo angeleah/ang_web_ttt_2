@@ -1,0 +1,16 @@
+--- 
+:type_1: super_computer
+:mark_1: X
+:type_2: human
+:mark_2: O
+:turn: 
+:board_state: 
+- X
+- X
+- O
+- X
+- O
+- " "
+- " "
+- X
+- O

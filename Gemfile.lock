@@ -37,7 +37,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ang_ttt_gem (~> 1.0.1)
+  ang_ttt_gem (~> 1.0.8)
   pry (~> 0.9.10)
   pry-nav (~> 0.2.2)
   rack (~> 1.4.1)

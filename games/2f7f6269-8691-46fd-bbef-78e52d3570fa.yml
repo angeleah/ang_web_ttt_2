@@ -1,0 +1,16 @@
+--- 
+:type_1: human
+:mark_1: X
+:type_2: computer
+:mark_2: W
+:turn: 1
+:board_state: 
+- " "
+- " "
+- " "
+- " "
+- " "
+- " "
+- " "
+- " "
+- " "

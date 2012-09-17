@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'rack/test'
 require 'web_ttt'
 require "ang_ttt_gem"
 require "game_repository"
@@ -25,7 +26,7 @@ describe 'ang_web_ttt_2' do
 
   it 'should load the quit page' do
     get '/quit'
-    last_response.should be_ok
+    last_response.should be_ok 
   end
 
   it 'should render the index page if set_up_turn is false' do
@@ -39,7 +40,20 @@ describe 'ang_web_ttt_2' do
   end
 
   it 'should render the board after each action' do
-    post "/board", :cell=> "3"
+    data = {
+    :type_1 => "super_computer",
+    :mark_1 => "X",
+    :type_2 => "human",
+    :mark_2 => "O",
+    :board_state => ["X", "X", "O", "X", "O", " ", " ", "X", "O"] 
+    }
+    File.open("games/4.yml", "w") do |f|
+      f.print data.to_yaml
+    end
+    @messenger = Messenger.new(4)
+    @messenger.stub(:load_game_state).and_return(data)
+    @messenger.reconstruct_game
+    post "/board", :cell=> "3", :game_id => 4
     last_response.body.include?('Start Over').should == true
   end
 end

@@ -4,10 +4,17 @@ require "game_repository"
 require "messenger"
 require "game"
 require "validate"
+require "securerandom"
+require "fileutils"
 
 describe 'Messenger' do
 
   let(:messenger) { Messenger.new }
+  
+  after(:all) do
+    FileUtils.rm_rf("games")
+    FileUtils.mkdir("games")
+  end
 
   it 'should collect player data' do
     type_1 = "human"
@@ -60,8 +67,8 @@ describe 'Messenger' do
     @player = 1
     messenger.collect_player_data("human", "A", "computer", "P")
     messenger.set_turn
-    messenger.prepare_hash_for_storage.should == {
-      :id => nil,
+    data = messenger.prepare_hash_for_storage
+    data.should == {
       :type_1 => "human",
       :mark_1 => "A",
       :type_2 => "computer",
@@ -137,19 +144,31 @@ describe 'Messenger' do
   end
 
   it 'should detect if a move is valid' do
-    messenger.set_up_game("human", "X","computer", "O")
-    board_state = ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
-    messenger.prepare_hash_for_storage
-    messenger.prepare_and_save_state
+   data = messenger.stub(:reconstruct_game).and_return({
+      :id => 45,
+      :type_1 => "human",
+      :mark_1 => "A",
+      :type_2 => "computer",
+      :mark_2 => "P",
+      :turn => 1,
+      :board_state => ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
+    })
+    messenger.populate_board(["X", "O", "X", "O", "O", " ", "O", "X", "X"])
     messenger.valid_move?(5).should == true
   end
   
   it  'should detect if a move is invalid' do
-    messenger.set_up_game("human", "X","computer", "O")
-    messenger.game.stub(:gather_board_state).and_return(["X", "O", "X", "O", "O", " ", "O", "X", "X"])
-    messenger.prepare_hash_for_storage
-    messenger.prepare_and_save_state
-    messenger.valid_move?(2).should == false
+    data = messenger.stub(:reconstruct_game).and_return({
+        :id => 45,
+        :type_1 => "human",
+        :mark_1 => "A",
+        :type_2 => "computer",
+        :mark_2 => "P",
+        :turn => 1,
+        :board_state => ["X", "O", "X", "O", "O", " ", "O", "X", "X"]
+      })
+      messenger.populate_board(["X", "O", "X", "O", "O", " ", "O", "X", "X"])
+      messenger.valid_move?(0).should == false
   end
 
   it 'should be able to save a game state' do
@@ -161,8 +180,9 @@ describe 'Messenger' do
       :turn => 1,
       :board_state => [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     }
+    game_id = messenger.game_id
     messenger.save_game_state(game_data)
-    File.read("./state_machine.yml").should include("human", "computer", "A", "P", " ", "1")
+    File.read("games/#{game_id}.yml").should include("human", "computer", "A", "P", " ", "1")
   end
 
   it 'should be able to load the game state' do
@@ -205,5 +225,21 @@ describe 'Messenger' do
     messenger.set_up_game("human", "X", "computer", "O")
     board_state = ["X", " ", " ", " ", " ", " ", " ", " ", " "]
     messenger.populate_board(board_state).should == ["X", " ", " ", " ", " ", " ", " ", " ", " "]
+  end
+  
+  it 'should should be able to delete a game file' do
+     game_data = {
+        :type_1 => "human",
+        :mark_1 => "A",
+        :type_2 => "computer",
+        :mark_2 => "P",
+        :turn => 1,
+        :board_state => [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+      }
+      game_id = messenger.game_id
+      messenger.save_game_state(game_data)
+      File.exists?("games/#{game_id}.yml").should == true
+      messenger.delete_game_file
+      File.exists?("games/#{game_id}.yml").should == false
   end
 end

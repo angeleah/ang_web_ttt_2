@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css/main.css" type="text/css" media="screen"/>
-<p><a href="/start_over">Start Over</a></p>
-<p><a href="/quit">Quit Game</a>
+<p><a href="/start_over?game_id=<%= @game_id %>">Start Over</a></p>
+<p><a href="/quit?game_id=<%= @game_id %>">Quit Game</a>
 </p>
 <p id="message"><%= @message %></p>
 <div id="board">
@@ -9,6 +9,7 @@
 		</thead>
 		<tbody>
 		    <form action="/board" method="post">
+				<input type="hidden" name="game_id" value="<%= @game_id %>" />
     			<tr id="top">
     				<td>
                         <button class="button" name="cell" type="hidden" value="0" <%= "disabled=\"true\"" if @messenger.game_over? %> ><%= @state[0] %></button>
