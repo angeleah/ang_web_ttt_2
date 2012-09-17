@@ -13,6 +13,11 @@ end
 
 describe 'ang_web_ttt_2' do
   include Rack::Test::Methods
+  
+  after(:all) do
+    FileUtils.rm_rf("games")
+    FileUtils.mkdir("games")
+  end
 
   it 'should should load the homepage' do
     get '/'
