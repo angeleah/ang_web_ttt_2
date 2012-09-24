@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Survey</title>
+    <style type="text/css" media="screen">
+        .error {
+            color: red;
+        }
+    </style>
+    <link rel="stylesheet" href="css/survey.css" type="text/css" media="screen"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script src="js/form_validation.js"></script>
+</head>
+<div class="body">
+    <h3>Survey</h3>
+    <p>Instructions:</p>
+    <ul class="overview-list">
+        <li class="overview-list-item">Read the questions.</li>
+        <li class="overview-list-item">For each question, fill in the answer appropriately.</li>
+    </ul>
+    <form id="jesus_gap_form" action="/" method="post">
+        <input type="hidden" id="site_id" name="site_id" value="hrco"/>
+        <div class="all_questions">
+            <div class="personal_information">
+                <p>
+                    <label for="Answer_000a_name">Name:</label>
+                    <input id="Answer_000a_name" name="Answer_000a_name" type="text" size="80" />
+                    <label for="Answer_000b_cell_phone">Cell Phone #(with area code.  No dashes, dots, or spaces.):</label>
+                    <input id="Answer_000b_cell_phone" name="Answer_000b_cell_phone" type="text" />
+                    <label for="Answer_000c_home_phone">Home Phone #(with area code. No dashes, dots, or spaces.):</label>
+                    <input id="Answer_000c_home_phone" name="Answer_000c_home_phone" type="text" />
+                    <label for="Answer_000d_email">Email Address:</label>
+                    <input id="Answer_000d_email" name="Answer_000d_email" type="text" size="80" />
+                    <label for="Answer_000e_church_name">Church Name:</label>
+                    <input id="Answer_000e_church_name" name="Answer_000e_church_name" type="text" value="Christ Lutheran Church" size="80" />
+                    <label>City / State of Church:</label>
+                    <input type="text" name="Answer_01_location_city" id="location_city" size="50" value="Highlands Ranch" />
+                    <input type="text" name="Answer_01_location_state" id="location_state" size="4" value="CO" />
+                </p>
+            </div>
+            <p>
+                First, we'd like to get some information about you. Select all that apply.
+            </p>
+            <p>
+                Please select your gender.
+            </p>
+            <ul>
+                <li>
+                    <input type="radio" name="Answer_00a_gender" value="male" id="male" /> <label for="male">Male</label>
+                </li>
+                <li>
+                    <input type="radio" name="Answer_00a_gender" value="female" id="female" /> <label for="female">Female</label>
+                </li>
+                <li>
+                    <input type="radio" name="Answer_00a_gender" value="transgendered" id="transgendered" /> <label for="transgendered">Trandgendered</label>
+                </li>
+            </ul>
+            <p>
+                Please Select your age.
+            </p>
+            <ul>
+                <li>
+                    <input type="radio" name="Answer_00b_age" value="<13" id="age_lt_13" /> <label for="age_lt_13">Younger than 13</label>
+                </li>
+                <li>
+                    <input type="radio" name="Answer_00b_age" value="13" id="age_13" /> <label for="age_13">13 years old</label>
+                </li>
+                <li>
+                    <input type="radio" name="Answer_00b_age" value="14..15" id="age_14_15" /> <label for="age_14_15">14-15 years old</label>
+                </li>
+                <li>
+                    <input type="radio" name="Answer_00b_age" value="16..17" id="age_16_17" /> <label for="age_16_17">16-17 years old</label>
+                </li>
+                <li>
+                    <input type="radio" name="Answer_00b_age" value="18..20" id="age_18_20" /> <label for="age_18_20">18-20 years old</label>
+                </li>
+            </ul>
+            <p>
+                Please select your ethnicity. Select all that apply.
+            </p>
+            <ul class="checkbox-group">
+                <li>
+                    <input class="ethnicitycheckbox" type="checkbox" name="Answer_00c_ethnicity_african_american" id="ethnicity_african_american" /> <label for="ethnicity_african_american">African American / Black</label>
+                </li>
+                <li>
+                    <input class="ethnicitycheckbox" type="checkbox" name="Answer_00c_ethnicity_american_indian" id="ethnicity_american_indian" /> <label for="ethnicity_american_indian">American Indian / Native Alaskan</label>
+                </li>
+                <li>
+                    <input class="ethnicitycheckbox" type="checkbox" name="Answer_00c_ethnicity_arab" id="ethnicity_arab" /> <label for="ethnicity_arab">Arab/Middle Eastern</label>
+                </li>
+                <li>
+                    <input class="ethnicitycheckbox" type="checkbox" name="Answer_00c_ethnicity_asian" id="ethnicity_asian" /> <label for="ethnicity_asian">Asian/Pacific Islander</label>
+                </li>
+                <li>
+                    <input class="ethnicitycheckbox" type="checkbox" name="Answer_00c_ethnicity_latino" id="ethnicity_latino" /> <label for="ethnicity_latino">Latino/Spanish</label>
+                </li>
+                <li>
+                    <input class="ethnicitycheckbox" type="checkbox" name="Answer_00c_ethnicity_multi" id="ethnicity_multi" /> <label for="ethnicity_multi">Multi-ethnic</label>
+                </li>
+                <li>
+                    <input class="ethnicitycheckbox" type="checkbox" name="Answer_00c_ethnicity_white" id="ethnicity_white" /> <label for="ethnicity_white">White</label>
+                </li>
+                <li>
+                    <input class="ethnicitycheckbox" type="checkbox" name="Answer_00c_ethnicity_other" id="ethnicity_other" /> <label for="ethnicity_other">Other</label>
+                </li>
+            </ul>
+            <hr />
+            <p>
+                Now that we have some information about you, we thank you in advance for answering the questions below.
+            </p>
+            <p>
+                1. How many years have you been attending your church?
+            </p>
+            <ul>
+                <li>
+                    <input type="radio" name="Answer_02_attend_years" value="1" id="attend_less_than_1" /> <label for="attend_less_than_1">Less than 1</label>
+                </li>
+                <li>
+                    <input type="radio" name="Answer_02_attend_years" value="2..5" id="attend_2_5" /> <label for="attend_2_5">2 - 5</label>
+                </li>
+                <li>
+                    <input type="radio" name="Answer_02_attend_years" value="6..9" id="attend_6_9" /> <label for="attend_6_9">6 - 9</label>
+                </li>
+                <li>
+                    <input type="radio" name="Answer_02_attend_years" value="10..14" id="attend_10_14" /> <label for="attend_10_14">10 - 14</label>
+                </li>
+                <li>
+                    <input type="radio" name="Answer_02_attend_years" value="15..19" id="attend_15_19" /> <label for="attend_15_19">15 - 19</label>
+                </li>
+            </ul>
+            <p>
+                2. Prior to attending your church, did you attend another?
+            </p>
+                <ul>
+                    <li>
+                        <input type="radio" name="Answer_03_attend_prior_church" value="yes" id="attend_prior_church_yes" /><label for="attend_prior_church_yes">Yes</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="Answer_03_attend_prior_church" value="no" id="attend_prior_church_no" /><label for="attend_prior_church_no">No</label>
+                    </li>
+                </ul>
+            </div>
+            <p>
+                2(a) If Yes, which denomination was your former church a part of? <!-- need to enforce this only if ? 2 was yes then, need at least 1 to be checked-->
+            </p>
+            <ul class="checkbox-group">
+                <li>
+                    <input type="checkbox" class="former-church" name="Answer_03a_former_church_methodist" id="former_church_methodist" /> <label for="former_church_methodist">Methodist</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="former-church" name="Answer_03a_former_church_prebyterian" id="former_church_prebyterian" /> <label for="former_church_prebyterian">Prebyterian</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="former-church" name="Answer_03a_former_church_catholic" id="former_church_catholic" /> <label for="former_church_catholic">Catholic</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="former-church" name="Answer_03a_former_church_baptist" id="former_church_baptist" /> <label for="former_church_baptist">Baptist</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="former-church" name="Answer_03a_former_church_bible_church" id="former_church_bible_church" /> <label for="former_church_bible_church">Bible Church</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="former-church" name="Answer_03a_former_church_elca" id="former_church_elca" /> <label for="former_church_elca">ELCA</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="former-church" name="Answer_03a_former_church_ucc" id="former_church_ucc" /> <label for="former_church_ucc">UCC</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="former-church" name="Answer_03a_former_church_non_denominational" id="former_church_non_denominational" /> <label for="Answer_former_church_non_denominational">Non-denominational</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="former-church" name="Answer_03a_former_church_evangelical_free" id="former_church_evangelical_free" /> <label for="former_church_evangelical_free">Evangelical Free</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="former-church" name="Answer_03a_former_church_idk" id="former_church_idk" /> <label for="former_church_idk">I Don't Know</label>
+                </li>
+                <li>
+                    <input type="checkbox" class="former-church" name="Answer_03a_former_church_other" id="former_church_other" /> <input type="text" name="Answer_03a_former_church_other" id="former_church_other_name" placeholder="Other" />
+                </li>
+            </ul>
+            <p>3. Check which word from each pair best describes Jesus.</p>
+            <table>
+            <tr>
+              <td class="pair"><strong>Pair 1:</strong></td>
+              <td>
+                <label for="pair_01_nice">Nice</label><input type="radio" name="Answer_04_pair_01" value="nice" id="pair_01_nice" />
+              </td>
+              <td>
+                <label for="pair_01_rowdy">Rowdy</label><input type="radio" name="Answer_04_pair_01" value="rowdy" id="pair_01_rowdy" />
+              </td>
+            </tr>
+            <tr>
+              <td class="pair"><strong>Pair 2:</strong></td>
+              <td>
+                <label for="pair_02_wise">Wise</label><input type="radio" name="Answer_04_pair_02" value="wise" id="pair_02_wise" />
+              </td>
+              <td>
+                <label for="pair_02_foolish">Foolish</label><input type="radio" name="Answer_04_pair_02" value="foolish" id="pair_02_foolish" />
+              </td>
+            </tr>
+            <tr>
+              <td class="pair"><strong>Pair 3:</strong></td>
+              <td>
+                <label for="pair_03_obedient">Obedient</label><input type="radio" name="Answer_04_pair_03" value="obedient" id="pair_03_obedient" />
+              </td>
+              <td>
+                <label for="pair_03_rebellious">Rebellious</label><input type="radio" name="Answer_04_pair_03" value="rebellious" id="pair_03_rebellious" />
+              </td>
+            </tr>
+            <tr>
+              <td class="pair"><strong>Pair 4:</strong></td>
+              <td>
+                <label for="pair_04_strong">Strong</label><input type="radio" name="Answer_04_pair_04" value="strong" id="pair_04_strong" />
+              </td>
+              <td>
+                <label for="pair_04_weak">Weak</label><input type="radio" name="Answer_04_pair_04" value="weak" id="pair_04_weak" />
+              </td>
+            </tr>
+            <tr>
+              <td class="pair"><strong>Pair 5:</strong></td>
+              <td>
+                <label for="pair_05_fun">Fun</label><input type="radio" name="Answer_04_pair_05" value="fun" id="pair_05_fun" />
+              </td>
+              <td>
+                <label for="pair_05_boring">Boring</label><input type="radio" name="Answer_04_pair_05" value="boring" id="pair_05_boring" />
+              </td>
+            </tr>
+            <tr>
+              <td class="pair"><strong>Pair 6:</strong></td>
+              <td>
+                <label for="pair_06_emotional">Emotional</label><input type="radio" name="Answer_04_pair_06" value="emotional" id="pair_06_emotional" />
+              </td>
+              <td>
+                <label for="pair_06_unfeeling">Unfeeling</label><input type="radio" name="Answer_04_pair_06" value="unfeeling" id="pair_06_unfeeling" />
+              </td>
+            </tr>
+             <tr>
+               <td class="pair"><strong>Pair 7:</strong></td>
+               <td>
+                 <label for="pair_07_talkative">Talkative</label><input type="radio" name="Answer_04_pair_07" value="talkative" id="pair_07_talkative" />
+               </td>
+               <td>
+                 <label for="pair_07_quiet">Quiet</label><input type="radio" name="Answer_04_pair_07" value="quiet" id="pair_07_quiet" />
+               </td>
+             </tr>
+             <tr>
+              <td class="pair"><strong>Pair 8:</strong></td>
+              <td>
+                <label for="pair_08_calm">Calm</label><input type="radio" name="Answer_04_pair_08" value="calm" id="pair_08_calm" />
+              </td>
+              <td>
+                <label for="pair_08_angry">Angry</label><input type="radio" name="Answer_04_pair_08" value="angry" id="pair_08_angry" />
+              </td>
+            </tr>
+            <tr>
+              <td class="pair"><strong>Pair 9:</strong></td>
+              <td>
+                <label for="pair_09_devoted">Devoted</label><input type="radio" name="Answer_04_pair_09" value="devoted" id="pair_09_devoted" />
+              </td>
+              <td>
+                <label for="pair_09_uncommitted">Uncommitted</label><input type="radio" name="Answer_04_pair_09" value="uncommitted" id="pair_09_uncommitted" />
+              </td>
+            </tr>
+            <tr>
+              <td class="pair"><strong>Pair 10:</strong></td>
+              <td>
+                <label for="pair_10_normal">Normal</label><input type="radio" name="Answer_04_pair_10" value="normal" id="pair_10_normal" />
+              </td>
+              <td>
+                <label for="pair_10_revolutionary">Revolutionary</label><input type="radio" name="Answer_04_pair_10" value="revolutionary" id="pair_10_revolutionary" />
+              </td>
+            </tr>
+          </table>
+          <p>
+            4. Was Jesus fully human?
+          </p>
+          <ul>
+            <li>
+                <input type="radio" name="Answer_05_fully_human" value="yes" id="fully_human_yes" /><label for="fully_human_yes">Yes</label>
+            </li>
+            <li>
+                <input type="radio" name="Answer_05_fully_human" value="no" id="fully_human_no" /><label for="fully_human_no">No</label>
+            </li>
+            <li>
+                <input type="radio" name="Answer_05_fully_human" value="idk" id="fully_human_idk"/><label for="fully_human_idk">I don't know</label>
+            </li>
+          </ul>
+          <p>
+            5. Is Jesus God?
+          </p>
+          <ul>
+            <li>
+                <input type="radio" name="Answer_06_is_god" value="yes" id="is_god_yes" /><label for="is_god_yes">Yes</label>
+            </li>
+            <li>
+                <input type="radio" name="Answer_06_is_god" value="no" id="is_god_no" /><label for="is_god_no">No</label>
+            </li>
+            <li>
+                <input type="radio" name="Answer_06_is_god" value="idk" id="is_god_idk" /><label for="is_god_idk">I don't know</label>
+            </li>
+          </ul>
+          <p>
+            6. Was Jesus perfect?
+          </p>
+          <ul>
+            <li>
+                <input type="radio" name="Answer_07_perfect" value="yes" id="perfect_yes" /><label for="perfect_yes">Yes</label>
+            </li>
+            <li>
+                <input type="radio" name="Answer_07_perfect" value="no" id="perfect_no" /><label for="perfect_no">No</label>
+            </li>
+            <li>
+                <input type="radio" name="Answer_07_perfect" value="idk" id="perfect_idk" /><label for="perfect_idk">I don't know</label>
+            </li>
+          </ul>
+          <p>
+            7. Did Jesus sin?
+          </p>
+          <ul>
+            <li>
+                <input type="radio" name="Answer_08_sinned" value="yes" id="sinned_yes" /><label for="sinned_yes">Yes</label>
+            </li>
+            <li>
+                <input type="radio" name="Answer_08_sinned" value="no" id="sinned_no" /><label for="sinned_no">No</label>
+            </li>
+            <li>
+                <input type="radio" name="Answer_08_sinned" value="idk" id="sinned_idk" /><label for="sinned_idk">I don't know</label>
+            </li>
+          </ul>
+          <p>
+            8. Did Jesus perform miracles?
+          </p>
+          <ul>
+            <li>
+                <input type="radio" name="Answer_09_miracles" value="yes" id="miracles_yes" /><label for="miracles_yes">Yes</label>
+            </li>
+            <li>
+                <input type="radio" name="Answer_09_miracles" value="no" id="miracles_no" /><label for="miracles_no">No</label>
+            </li>
+            <li>
+                <input type="radio" name="Answer_09_miracles" value="idk" id="miracles_idk" /><label for="miracles_idk">I don't know</label>
+            </li>
+          </ul>
+          <p>
+              9. Did Jesus rise from the dead?
+          </p>
+          <ul>
+            <li>
+                <input type="radio" name="Answer_10_rise_from_dead" value="yes" id="rise_from_dead_yes" /><label for="rise_from_dead_yes">Yes</label>
+            </li>
+            <li>
+                <input type="radio" name="Answer_10_rise_from_dead" value="no" id="rise_from_dead_no" /><label for="rise_from_dead_no">No</label>
+            </li>
+            <li>
+                <input type="radio" name="Answer_10_rise_from_dead" value="idk" id="rise_from_dead_idk" /><label for="rise_from_dead_idk">I don't know</label>
+            </li>
+          </ul>
+          <p>
+              10. Is it possible to be a Christian and not believe in Jesus?
+          </p>
+          <ul>
+              <li>
+                  <input type="radio" name="Answer_11_christian_and_not_believe" value="yes" id="christian_and_not_believe_yes" /><label for="christian_and_not_believe_yes">Yes</label>
+              </li>
+              <li>
+                  <input type="radio" name="Answer_11_christian_and_not_believe" value="no" id="christian_and_not_believe_no" /><label for="christian_and_not_believe_no">No</label>
+              </li>
+              <li>
+                  <input type="radio" name="Answer_11_christian_and_not_believe" value="idk" id="christian_and_not_believe_idk" /><label for="christian_and_not_believe_idk">I don't know</label>
+              </li>
+          </ul>
+          <p>
+              11. How frequently to you talk about Jesus (not just God)?
+          </p>
+          <p class="range_question first">
+              &hellip; In your youth ministry?
+          </p>
+          <div class="ranges">
+              <input type="radio" name="Answer_12a_talk_youth_ministry" value="5" id="talk_youth_ministry_every_time" /><label for="talk_youth_ministry_every_time">Every time</label>
+              <input type="radio" name="Answer_12a_talk_youth_ministry" value="4" id="talk_youth_ministry_weekly" /><label for="talk_youth_ministry_weekly">Weekly<Answer_/label>
+              <input type="radio" name="Answer_12a_talk_youth_ministry" value="2" id="talk_youth_ministry_monthly" /><label for="talk_youth_ministry_monthly">Monthly</label>
+              <input type="radio" name="Answer_12a_talk_youth_ministry" value="2" id="talk_youth_ministry_yearly"/ ><label for="talk_youth_ministry_yearly">Yearly</label>
+              <input type="radio" name="g" value="1" id="talk_youth_ministry_never" /><label for="talk_youth_ministry_never">Never</label>
+          </div>
+          <p class="range_question">
+            &hellip; With your friends
+          </p>
+          <div class="ranges">
+              <input type="radio" name="Answer_12b_talk_friends" value="5" id="talk_friends_every_time" /><label for="talk_friends_every_time">Every time</label>
+              <input type="radio" name="Answer_12b_talk_friends" value="4" id="talk_friends_weekly" /><label for="talk_friends_weekly">Weekly</label>
+              <input type="radio" name="Answer_12b_talk_friends" value="3" id="talk_friends_monthly" /><label for="talk_friends_monthly">Monthly</label>
+              <input type="radio" name="Answer_12b_talk_friends" value="2" id="talk_friends_yearly" /><label for="talk_friends_yearly">Yearly</label>
+              <input type="radio" name="Answer_12b_talk_friends" value="1" id="talk_friends_never" /><label for="talk_friends_never">Never</label>
+          </div>
+          <p class="range_question">
+            &hellip; With your family
+          </p>
+          <div class="ranges">
+              <input type="radio" name="Answer_12c_talk_family" value="5" id="talk_family_daily" /><label for="talk_family_daily">Daily</label>
+              <input type="radio" name="Answer_12c_talk_family" value="4" id="talk_family_weekly" /><label for="talk_family_weekly">Weekly</label>
+              <input type="radio" name="Answer_12c_talk_family" value="3" id="talk_family_monthly" /><label for="talk_family_monthly">Monthly</label>
+              <input type="radio" name="Answer_12c_talk_family" value="2" id="talk_family_yearly" /><label for="talk_family_yearly">Yearly</label>
+              <input type="radio" name="Answer_12c_talk_family" value="1" id="talk_family_never" /><label for="talk_family_never">Never</label>
+          </div>
+          <p>
+            12. How important is your faith to you?
+          </p>
+          <div class="ranges">
+              <input type="radio" name="Answer_13_faith_importance" value="4" id="faith_importance_very" /><label for="faith_importance_very">Very</label>
+              <input type="radio" name="Answer_13_faith_importance" value="3" id="faith_importance_somewhat" /><label for="faith_importance_somewhat">Somewhat</label>
+              <input type="radio" name="Answer_13_faith_importance" value="2" id="faith_importance_not_very" /><label for="faith_importance_not_very">Not very</label>
+              <input type="radio" name="Answer_13_faith_importance" value="1" id="faith_importance_irrelevant" /><label for="faith_importance_irrelevant">Irrelevant</label>
+          </div>
+          <p>
+            13. How important is Jesus to your faith?
+          </p>
+          <div class="ranges">
+              <input type="radio" name="Answer_14_jesus_importance" value="4" id="jesus_importance_very" /><label for="jesus_importance_very">Very</label>
+              <input type="radio" name="Answer_14_jesus_importance" value="3" id="jesus_importance_somewhat" /><label for="jesus_importance_somewhat">Somewhat</label>
+              <input type="radio" name="Answer_14_jesus_importance" value="2" id="jesus_importance_not_very" /><label for="jesus_importance_not_very">Not very</label>
+              <input type="radio" name="Answer_14_jesus_importance" value="1" id="jesus_importance_irrelevant" /><label for="jesus_importance_irrelevant">Irrelevant</label>
+          </div>
+          <p>
+            14. My faith in Jesus helps me find meaning and purpose in life.
+          </p>
+          <ul>
+            <li>
+                <input type="radio" name="Answer_15_jesus_meaning_purpose" value="2" id="jesus_meaning_purpose_agree" /><label for="jesus_meaning_purpose_agree">Agree</label>
+            </li>
+            <li>
+                <input type="radio" name="Answer_15_jesus_meaning_purpose" value="1" id="jesus_meaning_purpose_disagree" /><label for="jesus_meaning_purpose_disagree">Disagree</label>
+            </li>
+          </ul>
+          <p>
+            15. My faith in Jesus give me hope.
+          </p>
+          <ul>
+            <li>
+                <input type="radio" name="Answer_16_jesus_hope" value="2" id="jesus_hope_agree" /><label for="jesus_hope_agree">Agree</label>
+            </li>
+            <li>
+                <input type="radio" name="Answer_16_jesus_hope" value="1" id="jesus_hope_disagree" /><label for="jesus_hope_disagree">Disagree</label>
+            </li>
+          </ul>
+          <p>
+              16. Rank the following form 1-6 according to who or what had most influenced your understanding of Jesus (1 = Most influential; 6 = Least Influential
+          </p>
+          <ul class="rank_list"> <!-- need to make sure there is a number 1-6-->
+            <li>
+                <input type="text" size="3" name="Answer_17_influence_parents" id="influence_parents" />
+                <label for="influence_parents">Parent(s)</label>
+            </li>
+            <li>
+                <input type="text" size="3" name="Answer_17_influence_pastor" id="influence_pastor" />
+                <label for="influence_pastor">Pastor(s)</label>
+            </li>
+            <li>
+                <input type="text" size="3" name="Answer_17_influence_media" id="influence_media" />
+                <label for="influence_media">Media</label>
+            </li>
+            <li>
+                <input type="text" size="3" name="Answer_17_influence_youth_pastor" id="influence_youth_pastor" />
+                <label for="influence_youth_pastor">Youth Pastor/Director</label>
+            </li>
+            <li>
+                <input type="text" size="3" name="Answer_17_influence_friends" id="influence_friends" />
+                <label for="influence_friends">Friend(s)</label>
+            </li>
+            <li>
+                <input type="text" size="3" name="Answer_17_influence_scripture" id="influence_scripture" />
+                <label for="influence_scripture">Scripture</label>
+            </li>
+          </ul>
+          <p>
+            17. Who is Jesus?
+          </p>
+          <textarea name="Answer_18_who_is_jesus" id="who_id_jesus" rows="4" cols="80" ></textarea>
+          <p>
+              18. What did Jesus teach?
+          </p>
+          <textarea name="Answer_19_what_did_jesus_teach" id="what_did_jesus_teach" rows="4" cols="80" ></textarea>
+          <p>
+              19. Why did Jesus die?
+          </p>
+          <textarea name="Answer_20_why_did_jesus_die" id="why_did_jesus_die" rows="4" cols="80" ></textarea>
+        </div>
+        <p id="submit"><input type="submit" value="Submit"></p>
+    </form>
+</div>
+</html>

@@ -1,11 +1,9 @@
-  require "pry"
 require "ang_ttt_gem"
 require "game"
 require "validate"
 require "game_repository"
 require "message"
 require "securerandom"
-
 
 class Messenger
 
@@ -15,11 +13,11 @@ class Messenger
     @game = Game.new
     @id = id || SecureRandom.uuid
   end
-  
+
   def game_id
     @id
   end
-  
+
   def collect_player_data(type_1, mark_1, type_2, mark_2)
     @type_1 = type_1
     @mark_1 = mark_1
@@ -92,7 +90,7 @@ class Messenger
     state = gather_board_state
     return state, message
   end
-  
+
   def computer_loop
     while !display_board?
       player_move = get_move(@player)
@@ -116,7 +114,7 @@ class Messenger
       computer_move
     end
   end
-  
+
   def prepare_message
     @message = Message.new
     key = @game.result
@@ -132,7 +130,7 @@ class Messenger
       true
     end
   end
-  
+
   def prepare_hash_for_storage
     { :type_1 => @type_1,
       :mark_1 => @mark_1,

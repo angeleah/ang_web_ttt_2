@@ -1,0 +1,33 @@
+// Answer_03a_former_church_methodist: {
+//   required: true
+// },
+// Answer_03a_former_church_prebyterian: {
+//   required: true
+// },
+// Answer_03a_former_church_catholic: {
+//     required: true
+// },
+// Answer_03a_former_church_baptist: {
+//     required: true
+// },
+// Answer_03a_former_church_bible_church: {
+//     required: true
+// },
+// Answer_03a_former_church_elca: {
+//     required: true
+// },
+// Answer_03a_former_church_ucc: {
+//     required: true
+// },
+// Answer_03a_former_church_non_denominational: {
+//     required: true
+// },
+// Answer_03a_former_church_evangelical_free: {
+//     required: true
+// },
+// Answer_03a_former_church_idk: {
+//     required: true
+// },
+// Answer_03a_former_church_other: {
+//     required: true
+// },
