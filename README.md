@@ -5,7 +5,8 @@ This app is another version of my tic tac toe. You can play human vs. human or c
 Usage:
 ------
 - To run the app:
-  + Clone the repo
+  + Clone the repo.
+  + cd to the directory.
   + Bundle.
   + Start the server $ ruby web_ttt.rb
   + Open a browser window and navigate to localhost:4567
